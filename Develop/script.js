@@ -4,26 +4,25 @@
 
 var lengthChoice = Array.from({length: 121}, (v, k) => k+8);
 var caseChoice = ["lower","upper","both"];
-var specialChoice = ["numeric","special characters","both"];
+var specialChoice = ["number","special","both"];
 
 var generatePassword = function() {
 
-let passwordLength = prompt("Choose a character length for your password. Input a whole number between 8-128:");
+let passwordLength = Number(prompt("Choose a character length for your password. Input a whole number between 8-128:"));
 
-if ((passwordLength<8) && 
- (passwordLength>128)) 
+if (lengthChoice.includes(passwordLength)===false) 
   {
   alert("Your selection is invalid. Please try again.")
-} 
+}; 
 
 let passwordCase = prompt("Choose which letter case types to include in your password. Input upper lower or both:");
 
 if (caseChoice.includes(passwordCase)===false) 
   {
   alert("Your selection is invalid. Please try again.")
-} 
+}; 
 
-let passwordSpecial = prompt("Choose to include numbers and/or special characters in your password. Input numbers special or both:")
+let passwordSpecial = prompt("Choose to include numbers and/or special characters in your password. Input number special or both:")
 
 if (specialChoice.includes(passwordSpecial)===false)
  {
