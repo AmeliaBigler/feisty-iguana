@@ -51,7 +51,35 @@ var generatePassword = function() {
   var needsUpper = passwordCase === 'upper' || passwordCase === 'both';
   var needsLower = passwordCase === 'lower' || passwordCase === 'both';
 
-  // TO DO: combo variables/functions for final else in loop will go here.
+  // combo variables/functions for final else in loop.
+  var comboA = letters + letters.toUpperCase() + special + num;
+  function getRandomComboA () {
+    return comboA[Math.floor(Math.random()*comboA.length)];
+  }
+  var comboB = letters + special + num;
+  function getRandomComboB () {
+    return comboB[Math.floor(Math.random()*comboB.length)];
+  }
+  var comboC = letters + special
+  function getRandomComboC () {
+    return comboC[Math.floor(Math.random()*comboC.length)]
+  }
+  var comboD = letters + num;
+  function getRandomComboD () {
+    return comboD[Math.floor(Math.random()*comboD.length)];
+  }
+  var comboE = letters.toUpperCase() + special + num;
+  function getRandomComboE () {
+    return comboE[Math.floor(Math.random()*comboE.length)]
+  }
+  var comboF = letters.toUpperCase() + special;
+  function getRandomComboF () {
+    return comboF[Math.floor(Math.random()*comboF.length)];
+  }
+  var comboG = letters.toUpperCase() + num;
+  function getRandomComboG () {
+    return comboG[Math.floor(Math.random()*comboG.length)];
+  }
 
   // first 4 if's ensure that we have at least one of each required character.
   // last else fills up the rest of the length with random characters from unique array based on prompt combo.
@@ -72,10 +100,27 @@ var generatePassword = function() {
       needsLower = false
     } else {
       // TO DO: create unique combo arrays.
-      // if(comboA){}
-      // else if(comboB){}
-      // else if(comboC){}
-      // else{}
+      if(passwordCase==='both' && passwordSpecial==='both'){
+        char = getRandomComboA();
+      }
+      else if(passwordCase==='lower' && passwordSpecial==='both'){
+        char = getRandomComboB();
+      }
+      else if(passwordCase==='lower' && passwordSpecial==='special'){
+        char = getRandomComboC();
+      }
+      else if(passwordCase==='lower' && passwordSpecial==='number'){
+        char = getRandomComboD();
+      }
+      else if(passwordCase==='upper' && passwordSpecial==='both'){
+        char = getRandomComboE();
+      } 
+      else if (passwordCase==='upper' && passwordSpecial==='special'){
+        char = getRandomComboF();
+      }
+      else {
+        char = getRandomComboG();
+      }
     }
 
     userPassword.push(char); //pushes chars to the end of the array variable.
