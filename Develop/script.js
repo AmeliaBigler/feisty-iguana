@@ -1,57 +1,59 @@
-// variables for prompts
-var lengthChoice = Array.from({length: 121}, (v, k) => k+8);
-var caseChoice = ["lower","upper","both"];
-var specialChoice = ["number","special","both"];
+// A minumum of 2 character types will be included in password. This will create a more secure password.
 
-// generate password function. runs after generate button is clicked.
-// after this function completes, return value is used in writePassword function.
+// Variables used in prompts.
+var lengthChoice = Array.from({length: 121}, (v, k) => k+8);
+var caseChoice = ['lower','upper','both'];
+var specialChoice = ['number','special','both'];
+
+// Generate password function. Runs after generate button is clicked.
+// After this function completes, return value is used in writePassword function.
 var generatePassword = function() {
 
   // Three prompts and alerts.
-  let passwordLength = Number(prompt("Choose a character length for your password. Input a whole number between 8-128:"));
+  let passwordLength = Number(prompt('Choose a character length for your password. Input a whole number between 8-128:'));
   if (lengthChoice.includes(passwordLength)===false) 
     {
-    alert("Your selection is invalid. Please try again.")
-  }; 
-
-  let passwordCase = prompt("Choose which letter case types to include in your password. Input upper lower or both:");
-  if (caseChoice.includes(passwordCase)===false) 
-    {
-    alert("Your selection is invalid. Please try again.")
-  }; 
-
-  let passwordSpecial = prompt("Choose to include numbers and/or special characters in your password. Input number special or both:")
-  if (specialChoice.includes(passwordSpecial)===false)
-  {
-    alert("Your selection is invalid. Please try again.")
+    alert('Your selection is invalid. Please try again.');
   } 
 
-  // variables and functions for password array
-  var letters = ("abcdefghijklmnopqrstuvwxyz");
+  let passwordCase = prompt('Choose which letter case types to include in your password. Input upper lower or both:');
+  if (caseChoice.includes(passwordCase)===false) 
+    {
+    alert('Your selection is invalid. Please try again.');
+  }
+
+  let passwordSpecial = prompt('Choose to include numbers and/or special characters in your password. Input number special or both:')
+  if (specialChoice.includes(passwordSpecial)===false)
+  {
+    alert('Your selection is invalid. Please try again.');
+  } 
+
+  // Variables and functions used in for loop.
+  var letters = ('abcdefghijklmnopqrstuvwxyz');
   function getRandomLetter () {
     return letters[Math.floor(Math.random()*letters.length)];
   }
 
-  var special = ("!@#$%&*");
+  var special = ('\'\\ !#$%&"()*+,-./:;<=>?@[]^_`{|}~'); //slashes at position 0 and 2 allow ' and \ to be included in string
   function getRandomSpecial () { 
     return special[Math.floor(Math.random()*special.length)];
   }
 
-  var num = ("0123456789");
+  var num = ('0123456789');
   function getRandomNum () {
     return num[Math.floor(Math.random()*num.length)];
   } 
 
-  // define variable as empty array - to be filled via loop.
-  var userPassword = []
+  // Define variable as empty array - to be filled via for loop.
+  var userPassword = [];
   
-  // variables for first 4 if's in loop
+  // Variables for first 4 if's in for loop.
   var needsNumber = passwordSpecial === 'number' || passwordSpecial === 'both';
   var needsSpecial = passwordSpecial === 'special' || passwordSpecial === 'both';
   var needsUpper = passwordCase === 'upper' || passwordCase === 'both';
   var needsLower = passwordCase === 'lower' || passwordCase === 'both';
 
-  // combo variables/functions for final else in loop.
+  // Combo variables/functions for final else in for loop.
   var comboA = letters + letters.toUpperCase() + special + num;
   function getRandomComboA () {
     return comboA[Math.floor(Math.random()*comboA.length)];
@@ -60,9 +62,9 @@ var generatePassword = function() {
   function getRandomComboB () {
     return comboB[Math.floor(Math.random()*comboB.length)];
   }
-  var comboC = letters + special
+  var comboC = letters + special;
   function getRandomComboC () {
-    return comboC[Math.floor(Math.random()*comboC.length)]
+    return comboC[Math.floor(Math.random()*comboC.length)];
   }
   var comboD = letters + num;
   function getRandomComboD () {
@@ -70,7 +72,7 @@ var generatePassword = function() {
   }
   var comboE = letters.toUpperCase() + special + num;
   function getRandomComboE () {
-    return comboE[Math.floor(Math.random()*comboE.length)]
+    return comboE[Math.floor(Math.random()*comboE.length)];
   }
   var comboF = letters.toUpperCase() + special;
   function getRandomComboF () {
@@ -81,25 +83,23 @@ var generatePassword = function() {
     return comboG[Math.floor(Math.random()*comboG.length)];
   }
 
-  // first 4 if's ensure that we have at least one of each required character.
-  // last else fills up the rest of the length with random characters from unique array based on prompt combo.
-  for (let i = 0; i<= passwordLength; i++) {
+  // First 4 if's ensure addition of at least one of each selected character.
+  // Last else fills up the rest of password length with random characters from unique array based on prompt selection combo.
+  for (let i = 0; i < passwordLength; i++) {
 
-    let char
     if (needsNumber) {
-      char = getRandomNum()
-      needsNumber = false
+      char = getRandomNum();
+      needsNumber = false;
     } else if (needsSpecial) {
-      char = getRandomSpecial()
-      needsSpecial = false
+      char = getRandomSpecial();
+      needsSpecial = false;
     } else if (needsUpper) {
-      char = getRandomLetter().toUpperCase()
-      needsUpper = false
+      char = getRandomLetter().toUpperCase();
+      needsUpper = false;
     } else if (needsLower) {
-      char = getRandomLetter()
-      needsLower = false
+      char = getRandomLetter();
+      needsLower = false;
     } else {
-      // TO DO: create unique combo arrays.
       if(passwordCase==='both' && passwordSpecial==='both'){
         char = getRandomComboA();
       }
@@ -115,7 +115,7 @@ var generatePassword = function() {
       else if(passwordCase==='upper' && passwordSpecial==='both'){
         char = getRandomComboE();
       } 
-      else if (passwordCase==='upper' && passwordSpecial==='special'){
+      else if(passwordCase==='upper' && passwordSpecial==='special'){
         char = getRandomComboF();
       }
       else {
@@ -123,27 +123,28 @@ var generatePassword = function() {
       }
     }
 
-    userPassword.push(char); //pushes chars to the end of the array variable.
+    userPassword.push(char); // Push char to the end of the array variable.
   }
 
-  // TO DO: scramble array here for extra randomization
-  userPassword = userPassword.join(); // TO DO: remove comma separator.
+  userPassword = userPassword.join(''); // Join chars in a string with no separator.
 
-  return userPassword;
+  var shufflePassword = userPassword.split('').sort(function(){return 0.5-Math.random()}).join(''); // Shuffle string.
+
+  return shufflePassword;
 
 }
 
 // Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() { 
   var password = generatePassword(); //runs generate password function.
-  var passwordText = document.querySelector("#password"); //defines where password will go by HTML ID.
+  var passwordText = document.querySelector('#password'); //defines where password will go by HTML ID.
 
   passwordText.value = password; //sets defined area to display password that is generated.
 
 }
 
 // Add "click" event listener to generate button. This invokes the function to generate password.
-generateBtn.addEventListener("click", writePassword); 
+generateBtn.addEventListener('click', writePassword); 
