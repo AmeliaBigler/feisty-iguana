@@ -10,23 +10,38 @@ var specialChoice = ['number','special','both'];
 var generatePassword = function() {
 
   // Three prompts and alerts.
-  let passwordLength = Number(prompt('Choose a character length for your password. Input a whole number between 8-128:'));
-  if (lengthChoice.includes(passwordLength)===false) 
-    {
-    alert('Your selection is invalid. Please try again.');
-  } 
-
-  let passwordCase = prompt('Choose which letter case types to include in your password. Input upper lower or both:');
-  if (caseChoice.includes(passwordCase)===false) 
-    {
-    alert('Your selection is invalid. Please try again.');
+  function prompt1() {
+    let passwordLength = Number(prompt('Choose a character length for your password. Input a whole number between 8-128:'));
+    if (lengthChoice.includes(passwordLength)===false) {
+      alert('Your selection is invalid. Please try again.');
+      return prompt1();
+    } else {
+      return passwordLength;
+    }
   }
+  passwordLength = prompt1();
 
-  let passwordSpecial = prompt('Choose to include numbers and/or special characters in your password. Input number special or both:')
-  if (specialChoice.includes(passwordSpecial)===false)
-  {
-    alert('Your selection is invalid. Please try again.');
-  } 
+  function prompt2() {
+    let passwordCase = prompt('Choose which letter case types to include in your password. Input upper lower or both:');
+    if (caseChoice.includes(passwordCase)===false) {
+      alert('Your selection is invalid. Please try again.');
+      return prompt2();
+    } else {
+      return passwordCase;
+    }
+  }
+  passwordCase = prompt2();
+
+  function prompt3() {
+    let passwordSpecial = prompt('Choose to include numbers and/or special characters in your password. Input number special or both:');
+    if (specialChoice.includes(passwordSpecial)===false) {
+      alert('Your selection is invalid. Please try again.');
+      return prompt3();
+    } else {
+      return passwordSpecial;
+    }
+  }
+  passwordSpecial = prompt3();
 
   // Variables and functions used in for loop.
   var letters = ('abcdefghijklmnopqrstuvwxyz');
